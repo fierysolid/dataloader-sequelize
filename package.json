@@ -1,7 +1,7 @@
 {
-  "name": "dataloader-sequelize",
-  "version": "2.1.2",
-  "description": "Batching and simplification of Sequelize with facebook/dataloader",
+  "name": "dataloader-sequelize-no-cache",
+  "version": "1.0.0",
+  "description": "Batching and simplification of Sequelize with facebook/dataloader without cache. Useful for graphql subscriptions",
   "main": "lib/index.js",
   "options": {
     "mocha": "--require resources/mocha-bootload --check-leaks --timeout 10000 --colors --reporter spec --recursive"
@@ -47,7 +47,6 @@
   "dependencies": {
     "dataloader": "^1.2.0",
     "lodash": "^4.15.0",
-    "lru-cache": "^4.0.1",
     "shimmer": "^1.2.1"
   }
 }
