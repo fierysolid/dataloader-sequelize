@@ -2,9 +2,6 @@
 
 Batching, caching and simplification of Sequelize with facebook/dataloader
 
-[![Build Status](https://circleci.com/gh/mickhansen/dataloader-sequelize.svg)](https://circleci.com/gh/mickhansen/dataloader-sequelize)
-[![Coverage](https://codecov.io/gh/mickhansen/dataloader-sequelize/branch/master/graph/badge.svg)](https://codecov.io/gh/mickhansen/dataloader-sequelize)
-
 # How it works
 
 dataloader-sequelize is designed to provide per-request caching/batching for sequelize lookups, most likely in a graphql environment
@@ -22,6 +19,8 @@ import {createContext, EXPECTED_OPTIONS_KEY} from 'dataloader-sequelize';
 
 /* Per request */
 const context = createContext(sequelize); // must not be called before all models and associations are defined
+// or
+const context = createContext(sequelize, { cache: false }); // disable the use of LRU and Dataloader cache for stateful subscriptions
 await User.findById(2, {[EXPECTED_OPTIONS_KEY]: context});
 await User.findById(2, {[EXPECTED_OPTIONS_KEY]: context}); // Cached or batched, depending on timing
 ```
@@ -37,5 +36,5 @@ const context = createContext(sequelize);
 const results = await User.findAll({where: {/* super complicated */}});
 context.prime(results);
 
-await User.findById(2, {[EXPECTED_OPTIONS_KEY]: context}); // Cached, if was in results
+await User.findById(2, {[EXPECTED_OPTIONS_KEY]: context}); // Cached, if was in results and not cache: false
 ```
