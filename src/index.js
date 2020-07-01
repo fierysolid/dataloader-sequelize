@@ -174,7 +174,8 @@ function loaderForBTM(
           values: uniq(keys),
         };
       } else {
-        attributes =
+        // eslint-disable-next-line no-shadow
+        const attributes =
           options.through && options.through.attributes
             ? [...options.through.attributes, foreignKey]
             : [foreignKey];
